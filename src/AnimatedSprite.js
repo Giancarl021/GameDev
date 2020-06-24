@@ -1,4 +1,6 @@
-function createAnimatedSprite(src, spriteWidth, spriteHeight, frameWidth, frameHeight, spriteSheetWidth, spriteSheetHeight, delay) { 
+function createAnimatedSprite(src, spriteWidth, spriteHeight, spriteSheetWidth, spriteSheetHeight, delay) {
+    const frameWidth = src.width / spriteSheetWidth;
+    const frameHeight = src.height / spriteSheetHeight;
     let dx = 0,
         dy = 0,
         i = 0;
@@ -28,6 +30,11 @@ function createAnimatedSprite(src, spriteWidth, spriteHeight, frameWidth, frameH
 
     return {
         draw,
-        bottom: height - spriteHeight
+        top: 0,
+        left: 0,
+        bottom: height - spriteHeight,
+        right: width - spriteWidth,
+        width: spriteWidth,
+        height: spriteHeight
     };
 }

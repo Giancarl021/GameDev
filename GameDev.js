@@ -9,6 +9,9 @@ function setup() {
     game.build();
 }
 
+function keyPressed() {
+    game.interact(key);
+}
 
 function draw() {
     game.run();
