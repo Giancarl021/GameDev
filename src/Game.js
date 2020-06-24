@@ -13,6 +13,7 @@ function createGame() {
         assets.enemy = loadImage('../assets/imagens/inimigos/gotinha.png');
         assets.background = loadImage('../assets/imagens/cenario/floresta.png');
         assets.backgroundMusic = loadSound('../assets/sons/trilha_jogo.mp3');
+        assets.jumpSFX = loadSound('../assets/sons/somPulo.mp3');
     }
 
     function build() {
@@ -23,7 +24,7 @@ function createGame() {
         delta.add('enemy', enemy, -enemy.width, 0, 5, 2);
         delta.add('player', player, 0, 0, 0, 3, 2);
 
-        collider.add(player, enemy, .7, true);
+        collider.add(player, enemy, .7);
         collider.subscribe(() => noLoop());
         assets.backgroundMusic.loop();
     }
@@ -40,6 +41,7 @@ function createGame() {
         switch(key) {
             case 'ArrowUp':
             case ' ':
+                assets.jumpSFX.play();
                 delta.jump('player', 40);
                 break;
         };
