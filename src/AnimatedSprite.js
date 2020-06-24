@@ -5,7 +5,11 @@ function createAnimatedSprite(src, spriteWidth, spriteHeight, spriteSheetWidth, 
         dy = 0,
         i = 0;
 
+    const coords = {};
+
     function draw(x, y) {
+        coords.x = x;
+        coords.y = y;
         image(src, x, y, spriteWidth, spriteHeight, dx, dy, frameWidth, frameHeight);
         if(i === delay) {
             i = 0;
@@ -35,6 +39,7 @@ function createAnimatedSprite(src, spriteWidth, spriteHeight, spriteSheetWidth, 
         bottom: height - spriteHeight,
         right: width - spriteWidth,
         width: spriteWidth,
-        height: spriteHeight
+        height: spriteHeight,
+        coords
     };
 }
