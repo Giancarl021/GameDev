@@ -1,9 +1,10 @@
-function createAnimatedSprite(src, spriteWidth, spriteHeight, spriteSheetWidth, spriteSheetHeight, delay) {
+function createAnimatedSprite(src, spriteWidth, spriteHeight, spriteSheetWidth, spriteSheetHeight, delay, frameCount = spriteSheetHeight * spriteSheetWidth) {
     const frameWidth = src.width / spriteSheetWidth;
     const frameHeight = src.height / spriteSheetHeight;
     let dx = 0,
         dy = 0,
-        i = 0;
+        i = 0,
+        frame = 0;
 
     const coords = {};
 
@@ -11,7 +12,7 @@ function createAnimatedSprite(src, spriteWidth, spriteHeight, spriteSheetWidth, 
         coords.x = x;
         coords.y = y;
         image(src, x, y, spriteWidth, spriteHeight, dx, dy, frameWidth, frameHeight);
-        if(i === delay) {
+        if (i === delay) {
             i = 0;
             moveIndex();
         } else {
@@ -20,16 +21,20 @@ function createAnimatedSprite(src, spriteWidth, spriteHeight, spriteSheetWidth, 
     }
 
     function moveIndex() {
-        if((dx / frameWidth) === spriteSheetWidth - 1) {
+        const d = (dx / frameWidth);
+
+        if (frame === frameCount - 1) {
+            dx = dy = frame = 0;
+            return;
+        }
+        if (d === spriteSheetWidth - 1) {
             dx = 0;
-            if((dy / frameHeight) === spriteSheetHeight - 1) {
-                dy = 0;
-            } else {
-                dy += frameHeight;
-            }
+            dy += frameHeight;
         } else {
             dx += frameWidth;
         }
+
+        frame++;
     }
 
     return {

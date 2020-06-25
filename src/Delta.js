@@ -30,7 +30,7 @@ function createDeltaController() {
     function move(key, axis) {
         const entity = delta[key];
         if (entity.coords[axis] >= width + entity.object.width) {
-            entity.coords[axis] = 0;
+            entity.coords[axis] = entity.initial.x;
         } else {
             entity.coords[axis] += entity.speed;
         }
